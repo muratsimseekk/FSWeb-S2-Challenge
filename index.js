@@ -94,18 +94,22 @@ function cumleKur(
   dorduncu = "",
   besinci = ""
 ) {
+  // console.log(birinci);
+  // console.log(ikinci);
+  // console.log(ucuncu);
   return birinci + ikinci + ucuncu + dorduncu + besinci;
 }
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 1 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
-
+console.log(cumleKur("Hello World"));
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 2 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
-
+console.log(cumleKur("Hello ", "World"));
 /* (Oto test var) cumleKur fonksiyonuna 5 parametre göndererek "Ben iyi bir yazılımcı olacağım!" stringini 
 elde edin, sonucu `bircumle` değişkenine atayın ve konsolde gözlemleyin */
-var bircumle;
+var bircumle = cumleKur("Ben ", "iyi ", "bir ", "yazılımcı ", "olacağım!");
+console.log(bircumle);
 
 /* kodlar buraya */
 
@@ -128,10 +132,16 @@ var bircumle;
 			5. Oluşturulan yeni dizi döndürülecek.
 	*/
 
-function cumlelereDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
-}
+function cumlelereDonustur(dizi, kesme) {
+  const func = dizi.map((eleman) => {
+    let yeni = eleman.join(kesme);
 
+    return yeni;
+  });
+
+  return func;
+}
+console.log("Görev 1 ", cumlelereDonustur(cumleler, ","));
 /* GÖREV 2:
 		paragrafOlustur fonksiyonuna aşağıdakileri uygulayın.
 			1. cumleler dizisi fonksiyonun birinci parametresi olarak alınacak
@@ -141,36 +151,61 @@ function cumlelereDonustur(/* kodlar buraya */) {
          diziye aktarılacak
 			5. Oluşturulan bu dizinin tek sayılı anahtarlarını(index) [1,3,5,7,9] kullanarak ilk 5 elemanı geriçağırım 
          olarak çağırılan cumleKur dizisinin parametreleri olarak aktarılarak çağırılacak ÖRNEK: 
-         callback(dizi[1],dizi[2],dizi[3],dizi[5],dizi[7])
+         callback(dizi[1],dizi[3],dizi[5],dizi[7],dizi[9])
 			6. Oluşturulan paragraf döndürülecek
 	*/
-
-function paragrafOlustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function paragrafOlustur(dizi2, cumleYap, cumleDonustur) {
+  let dizi = [];
+  let yeniDizi = [];
+  let sonDizi = [];
+  let paragraf = [];
+  for (let i = 0; i < dizi2.length; i++) {
+    if (i % 2 == 1) {
+      dizi.push(dizi2[i]);
+    }
+  }
+  console.log(dizi);
+  yeniDizi = dizi.splice(0, 5);
+  console.log(yeniDizi);
+  sonDizi = cumlelereDonustur(yeniDizi, " ");
+  console.log(sonDizi);
+  return cumleKur(sonDizi[0], sonDizi[1], sonDizi[2], sonDizi[3], sonDizi[4]);
 }
+
+console.log("Görev 2", paragrafOlustur(cumleler, cumleKur, cumlelereDonustur));
 
 /* 	GÖREV 3:
 		Yukarıda isimleri sebzeler ve meyveler olan 2 dizi bulunmaktadır. Bu dizileri kullanarak aşağıdaki görevleri tamamlayın.
 			3a. meyveler dizisinin ilk ve son elemanlarını diziden çıkartın. (.pop ve .shift metodlarını kullanın)
  */
 //3a çözümü
-/* kodlar buraya */
-
+meyveler.pop();
+meyveler.shift();
+console.log("3a nın çözümü", meyveler);
 /* 			3b.  Bir tavşan ve bir kirpi arkadaşlar sebzeler dizimizin peşine düştü. Tavşan => 🐇 , Kirpi=> 🦔 , 
 Tavşanla kirpi sebzeleri ele geçirmek için bir plan kurdular. Tavşan diziye önden saldıracak, kirpi ise 
 arkalarından dolaşacak. Varsayalım ki arkadaşların planları başarılı oldu. Tavşanı dizinin ilk elemanına 🐇, 
 Kirpiyi dizinin son elemanına ekleyin 🦔
  */
 //3b çözümü
-/* kodlar buraya */
+
+let tavsan = "🐇";
+let kirpi = "🦔";
+
+sebzeler.unshift(tavsan);
+sebzeler.push(kirpi);
+
+console.log("3b nin çözümü ", sebzeler);
 
 /* 			3c. manav isminde bir dizi oluşturun.`meyveler` dizisi ilk elemanlara, `sebzeler` dizisi son 
 elemanlara denk gelecek şekilde, iki diziyi birleştirip sonucu manav dizisine aktarın. (.concat metodu)
  */
 //3c çözümü
-/* kodlar buraya */
+let manav = [];
 
-var manav;
+manav = meyveler.concat(sebzeler);
+
+console.log(manav);
 
 /* 	GÖREV 4:
 		Yeni kurulmuş bir mesajlaşma startup firması atılan mesajları emojilerle zenginleştirmek istiyor. 
@@ -189,10 +224,28 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function emojileriDonustur(ifade, emojilerNesne) {
+  // let mesaj = ifade.toLowerCase();
+
+  // // return emojilerNesne;
+  // let anahtarlar = Object.keys(emojilerNesne);
+  // // return anahtarlar;
+  // const sonuc = anahtarlar.filter((eleman) => eleman == ifade);
+  // // return sonuc;
+
+  // return emojilerNesne[sonuc];
+
+  for (let anahtarlar in emojilerNesne) {
+    let emojim = emojilerNesne[anahtarlar];
+    ifade = ifade.replaceAll(anahtarlar.toLowerCase(), emojim);
+    ifade = ifade.replaceAll(anahtarlar.toUpperCase(), emojim);
+  }
+
+  return ifade;
 }
 
+console.log("Son soru : ", emojileriDonustur(":o", emojiler));
+// console.log(emojiler[":)"]);
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 function sa() {
   console.log("Kodlar çalışıyor");
